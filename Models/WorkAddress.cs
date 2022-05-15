@@ -46,6 +46,8 @@ public partial class WorkAddress
 
 
 
+    public virtual User User { get; set; }
+
     public virtual City City { get; set; }
 
     public virtual Country Country { get; set; }
@@ -53,8 +55,6 @@ public partial class WorkAddress
     public virtual District District { get; set; }
 
     public virtual State State { get; set; }
-
-    public virtual User User { get; set; }
 
 }
 

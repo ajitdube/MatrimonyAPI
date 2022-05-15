@@ -109,14 +109,6 @@ public partial class User
 
 
 
-    public virtual Cast Cast { get; set; }
-
-    public virtual City City { get; set; }
-
-    public virtual Country Country { get; set; }
-
-    public virtual District District { get; set; }
-
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<FamilyDetail> FamilyDetails { get; set; }
@@ -151,8 +143,6 @@ public partial class User
 
     public virtual Role Role { get; set; }
 
-    public virtual State State { get; set; }
-
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<UserInterestedInProfile> UserInterestedInProfiles { get; set; }
@@ -180,6 +170,14 @@ public partial class User
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<WorkAddress> WorkAddresses { get; set; }
+
+    public virtual City City { get; set; }
+
+    public virtual Country Country { get; set; }
+
+    public virtual District District { get; set; }
+
+    public virtual State State { get; set; }
 
 }
 

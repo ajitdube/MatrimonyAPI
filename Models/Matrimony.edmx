@@ -50,6 +50,7 @@
           <Property Name="CreatedBy" Type="int" />
           <Property Name="DateModified" Type="datetime" />
           <Property Name="ModifiedBy" Type="int" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="Complexion">
           <Key>
@@ -72,6 +73,7 @@
           <Property Name="CreatedBy" Type="int" />
           <Property Name="DateModified" Type="datetime" />
           <Property Name="ModifiedBy" Type="int" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="District">
           <Key>
@@ -84,6 +86,7 @@
           <Property Name="CreatedBy" Type="int" />
           <Property Name="DateModified" Type="datetime" />
           <Property Name="ModifiedBy" Type="int" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="Education">
           <Key>
@@ -383,6 +386,7 @@
           <Property Name="CreatedBy" Type="int" />
           <Property Name="DateModified" Type="datetime" />
           <Property Name="ModifiedBy" Type="int" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -891,18 +895,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblUser_tblCast">
-          <End Role="Cast" Type="Self.Cast" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cast">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="CastId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblUser_tblCity">
           <End Role="City" Type="Self.City" Multiplicity="0..1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -1222,7 +1214,7 @@
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Validate_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Username" Type="nvarchar" Mode="In" />
-          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar(max)" Mode="In" />
         </Function>
         <EntityContainer Name="MatrimonydbModelStoreContainer">
           <EntitySet Name="Annualincome" EntityType="Self.Annualincome" Schema="dbo" store:Type="Tables" />
@@ -1394,10 +1386,6 @@
             <End Role="Country" EntitySet="Country" />
             <End Role="State" EntitySet="State" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblUser_tblCast" Association="Self.FK_tblUser_tblCast">
-            <End Role="Cast" EntitySet="Cast" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
           <AssociationSet Name="FK_tblUser_tblCity" Association="Self.FK_tblUser_tblCity">
             <End Role="City" EntitySet="City" />
             <End Role="User" EntitySet="User" />
@@ -1554,11 +1542,7 @@
           <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="Annualincomes" EntityType="MatrimonydbModel.Annualincome" />
           <EntitySet Name="BodyTypes" EntityType="MatrimonydbModel.BodyType" />
-          <EntitySet Name="Casts" EntityType="MatrimonydbModel.Cast" />
-          <EntitySet Name="Cities" EntityType="MatrimonydbModel.City" />
           <EntitySet Name="Complexions" EntityType="MatrimonydbModel.Complexion" />
-          <EntitySet Name="Countries" EntityType="MatrimonydbModel.Country" />
-          <EntitySet Name="Districts" EntityType="MatrimonydbModel.District" />
           <EntitySet Name="Educations" EntityType="MatrimonydbModel.Education" />
           <EntitySet Name="EmploymentTypes" EntityType="MatrimonydbModel.EmploymentType" />
           <EntitySet Name="FamilyDetails" EntityType="MatrimonydbModel.FamilyDetail" />
@@ -1581,7 +1565,6 @@
           <EntitySet Name="Religions" EntityType="MatrimonydbModel.Religion" />
           <EntitySet Name="Roles" EntityType="MatrimonydbModel.Role" />
           <EntitySet Name="Stars" EntityType="MatrimonydbModel.Star" />
-          <EntitySet Name="States" EntityType="MatrimonydbModel.State" />
           <EntitySet Name="sysdiagrams" EntityType="MatrimonydbModel.sysdiagram" />
           <EntitySet Name="Users" EntityType="MatrimonydbModel.User" />
           <EntitySet Name="UserInterestedInProfiles" EntityType="MatrimonydbModel.UserInterestedInProfile" />
@@ -1601,77 +1584,9 @@
             <End Role="BodyType" EntitySet="BodyTypes" />
             <End Role="PhysicalProfileInfo" EntitySet="PhysicalProfileInfoes" />
           </AssociationSet>
-          <AssociationSet Name="FK_Cast_Religion" Association="MatrimonydbModel.FK_Cast_Religion">
-            <End Role="Religion" EntitySet="Religions" />
-            <End Role="Cast" EntitySet="Casts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblUser_tblCast" Association="MatrimonydbModel.FK_tblUser_tblCast">
-            <End Role="Cast" EntitySet="Casts" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PermanantAddress_City" Association="MatrimonydbModel.FK_PermanantAddress_City">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="PermanantAddress" EntitySet="PermanantAddresses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblCity_tbldistrict" Association="MatrimonydbModel.FK_tblCity_tbldistrict">
-            <End Role="District" EntitySet="Districts" />
-            <End Role="City" EntitySet="Cities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblPartnerPref_tblCity" Association="MatrimonydbModel.FK_tblPartnerPref_tblCity">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="PartnerPreferance" EntitySet="PartnerPreferances" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblUser_tblCity" Association="MatrimonydbModel.FK_tblUser_tblCity">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WorkAddress_City" Association="MatrimonydbModel.FK_WorkAddress_City">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="WorkAddress" EntitySet="WorkAddresses" />
-          </AssociationSet>
           <AssociationSet Name="FK_PhysicalProfileInfo_Complexion" Association="MatrimonydbModel.FK_PhysicalProfileInfo_Complexion">
             <End Role="Complexion" EntitySet="Complexions" />
             <End Role="PhysicalProfileInfo" EntitySet="PhysicalProfileInfoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PermanantAddress_Country" Association="MatrimonydbModel.FK_PermanantAddress_Country">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="PermanantAddress" EntitySet="PermanantAddresses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblPartnerPref_tblCountry" Association="MatrimonydbModel.FK_tblPartnerPref_tblCountry">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="PartnerPreferance" EntitySet="PartnerPreferances" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblState_tblCountry" Association="MatrimonydbModel.FK_tblState_tblCountry">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="State" EntitySet="States" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblUser_tblCountry" Association="MatrimonydbModel.FK_tblUser_tblCountry">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WorkAddress_Country" Association="MatrimonydbModel.FK_WorkAddress_Country">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="WorkAddress" EntitySet="WorkAddresses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tbldistrict_tblState" Association="MatrimonydbModel.FK_tbldistrict_tblState">
-            <End Role="State" EntitySet="States" />
-            <End Role="District" EntitySet="Districts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblPartnerPref_tbldistrict" Association="MatrimonydbModel.FK_tblPartnerPref_tbldistrict">
-            <End Role="District" EntitySet="Districts" />
-            <End Role="PartnerPreferance" EntitySet="PartnerPreferances" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblPermanantAddress_District" Association="MatrimonydbModel.FK_tblPermanantAddress_District">
-            <End Role="District" EntitySet="Districts" />
-            <End Role="PermanantAddress" EntitySet="PermanantAddresses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblUser_tbldistrict" Association="MatrimonydbModel.FK_tblUser_tbldistrict">
-            <End Role="District" EntitySet="Districts" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WorkAddress_District" Association="MatrimonydbModel.FK_WorkAddress_District">
-            <End Role="District" EntitySet="Districts" />
-            <End Role="WorkAddress" EntitySet="WorkAddresses" />
           </AssociationSet>
           <AssociationSet Name="FK_PhysicalProfileInfo_Education" Association="MatrimonydbModel.FK_PhysicalProfileInfo_Education">
             <End Role="Education" EntitySet="Educations" />
@@ -1737,17 +1652,9 @@
             <End Role="Star" EntitySet="Stars" />
             <End Role="PartnerPreferance" EntitySet="PartnerPreferances" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblPartnerPref_tblState" Association="MatrimonydbModel.FK_tblPartnerPref_tblState">
-            <End Role="State" EntitySet="States" />
-            <End Role="PartnerPreferance" EntitySet="PartnerPreferances" />
-          </AssociationSet>
           <AssociationSet Name="FK_tblPartnerPref_tblUser" Association="MatrimonydbModel.FK_tblPartnerPref_tblUser">
             <End Role="User" EntitySet="Users" />
             <End Role="PartnerPreferance" EntitySet="PartnerPreferances" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PermanantAddress_State" Association="MatrimonydbModel.FK_PermanantAddress_State">
-            <End Role="State" EntitySet="States" />
-            <End Role="PermanantAddress" EntitySet="PermanantAddresses" />
           </AssociationSet>
           <AssociationSet Name="FK_PermanantAddress_User" Association="MatrimonydbModel.FK_PermanantAddress_User">
             <End Role="User" EntitySet="Users" />
@@ -1772,14 +1679,6 @@
           <AssociationSet Name="FK_tblUser_tblRole" Association="MatrimonydbModel.FK_tblUser_tblRole">
             <End Role="Role" EntitySet="Roles" />
             <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblUser_tblState" Association="MatrimonydbModel.FK_tblUser_tblState">
-            <End Role="State" EntitySet="States" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WorkAddress_State" Association="MatrimonydbModel.FK_WorkAddress_State">
-            <End Role="State" EntitySet="States" />
-            <End Role="WorkAddress" EntitySet="WorkAddresses" />
           </AssociationSet>
           <AssociationSet Name="FK_tblUserInterestInProfile_tblUser" Association="MatrimonydbModel.FK_tblUserInterestInProfile_tblUser">
             <End Role="User" EntitySet="Users" />
@@ -1817,6 +1716,91 @@
             <Parameter Name="Username" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Casts" EntityType="MatrimonydbModel.Cast" />
+          <AssociationSet Name="FK_Cast_Religion" Association="MatrimonydbModel.FK_Cast_Religion">
+            <End Role="Religion" EntitySet="Religions" />
+            <End Role="Cast" EntitySet="Casts" />
+          </AssociationSet>
+          <EntitySet Name="Cities" EntityType="MatrimonydbModel.City" />
+          <EntitySet Name="Countries" EntityType="MatrimonydbModel.Country" />
+          <EntitySet Name="Districts" EntityType="MatrimonydbModel.District" />
+          <EntitySet Name="States" EntityType="MatrimonydbModel.State" />
+          <AssociationSet Name="FK_PermanantAddress_City" Association="MatrimonydbModel.FK_PermanantAddress_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="PermanantAddress" EntitySet="PermanantAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCity_tbldistrict" Association="MatrimonydbModel.FK_tblCity_tbldistrict">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPartnerPref_tblCity" Association="MatrimonydbModel.FK_tblPartnerPref_tblCity">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="PartnerPreferance" EntitySet="PartnerPreferances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUser_tblCity" Association="MatrimonydbModel.FK_tblUser_tblCity">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkAddress_City" Association="MatrimonydbModel.FK_WorkAddress_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="WorkAddress" EntitySet="WorkAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PermanantAddress_Country" Association="MatrimonydbModel.FK_PermanantAddress_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="PermanantAddress" EntitySet="PermanantAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPartnerPref_tblCountry" Association="MatrimonydbModel.FK_tblPartnerPref_tblCountry">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="PartnerPreferance" EntitySet="PartnerPreferances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblState_tblCountry" Association="MatrimonydbModel.FK_tblState_tblCountry">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="State" EntitySet="States" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUser_tblCountry" Association="MatrimonydbModel.FK_tblUser_tblCountry">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkAddress_Country" Association="MatrimonydbModel.FK_WorkAddress_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="WorkAddress" EntitySet="WorkAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbldistrict_tblState" Association="MatrimonydbModel.FK_tbldistrict_tblState">
+            <End Role="State" EntitySet="States" />
+            <End Role="District" EntitySet="Districts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPartnerPref_tbldistrict" Association="MatrimonydbModel.FK_tblPartnerPref_tbldistrict">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="PartnerPreferance" EntitySet="PartnerPreferances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPermanantAddress_District" Association="MatrimonydbModel.FK_tblPermanantAddress_District">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="PermanantAddress" EntitySet="PermanantAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUser_tbldistrict" Association="MatrimonydbModel.FK_tblUser_tbldistrict">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkAddress_District" Association="MatrimonydbModel.FK_WorkAddress_District">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="WorkAddress" EntitySet="WorkAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPartnerPref_tblState" Association="MatrimonydbModel.FK_tblPartnerPref_tblState">
+            <End Role="State" EntitySet="States" />
+            <End Role="PartnerPreferance" EntitySet="PartnerPreferances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PermanantAddress_State" Association="MatrimonydbModel.FK_PermanantAddress_State">
+            <End Role="State" EntitySet="States" />
+            <End Role="PermanantAddress" EntitySet="PermanantAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUser_tblState" Association="MatrimonydbModel.FK_tblUser_tblState">
+            <End Role="State" EntitySet="States" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkAddress_State" Association="MatrimonydbModel.FK_WorkAddress_State">
+            <End Role="State" EntitySet="States" />
+            <End Role="WorkAddress" EntitySet="WorkAddresses" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="AddupdateAnnualincome_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1862,37 +1846,6 @@
           <Property Name="ModifiedBy" Type="Int32" />
           <NavigationProperty Name="PhysicalProfileInfoes" Relationship="MatrimonydbModel.FK_PhysicalProfileInfo_Bodytype" FromRole="BodyType" ToRole="PhysicalProfileInfo" />
         </EntityType>
-        <EntityType Name="Cast">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CastName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="DateCreated" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="DateModified" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedBy" Type="Int32" />
-          <Property Name="ReligionId" Type="Int32" />
-          <NavigationProperty Name="Religion" Relationship="MatrimonydbModel.FK_Cast_Religion" FromRole="Cast" ToRole="Religion" />
-          <NavigationProperty Name="Users" Relationship="MatrimonydbModel.FK_tblUser_tblCast" FromRole="Cast" ToRole="User" />
-        </EntityType>
-        <EntityType Name="City">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DistrictId" Type="Int32" Nullable="false" />
-          <Property Name="CityName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="DatecCreated" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="DateModified" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="PermanantAddresses" Relationship="MatrimonydbModel.FK_PermanantAddress_City" FromRole="City" ToRole="PermanantAddress" />
-          <NavigationProperty Name="District" Relationship="MatrimonydbModel.FK_tblCity_tbldistrict" FromRole="City" ToRole="District" />
-          <NavigationProperty Name="PartnerPreferances" Relationship="MatrimonydbModel.FK_tblPartnerPref_tblCity" FromRole="City" ToRole="PartnerPreferance" />
-          <NavigationProperty Name="Users" Relationship="MatrimonydbModel.FK_tblUser_tblCity" FromRole="City" ToRole="User" />
-          <NavigationProperty Name="WorkAddresses" Relationship="MatrimonydbModel.FK_WorkAddress_City" FromRole="City" ToRole="WorkAddress" />
-        </EntityType>
         <EntityType Name="Complexion">
           <Key>
             <PropertyRef Name="Id" />
@@ -1904,40 +1857,6 @@
           <Property Name="DateModified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
           <NavigationProperty Name="PhysicalProfileInfoes" Relationship="MatrimonydbModel.FK_PhysicalProfileInfo_Complexion" FromRole="Complexion" ToRole="PhysicalProfileInfo" />
-        </EntityType>
-        <EntityType Name="Country">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CountryName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="DateCreated" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="DateModified" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="PermanantAddresses" Relationship="MatrimonydbModel.FK_PermanantAddress_Country" FromRole="Country" ToRole="PermanantAddress" />
-          <NavigationProperty Name="PartnerPreferances" Relationship="MatrimonydbModel.FK_tblPartnerPref_tblCountry" FromRole="Country" ToRole="PartnerPreferance" />
-          <NavigationProperty Name="States" Relationship="MatrimonydbModel.FK_tblState_tblCountry" FromRole="Country" ToRole="State" />
-          <NavigationProperty Name="Users" Relationship="MatrimonydbModel.FK_tblUser_tblCountry" FromRole="Country" ToRole="User" />
-          <NavigationProperty Name="WorkAddresses" Relationship="MatrimonydbModel.FK_WorkAddress_Country" FromRole="Country" ToRole="WorkAddress" />
-        </EntityType>
-        <EntityType Name="District">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StateId" Type="Int32" />
-          <Property Name="DistrictName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="DateCreated" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="DateModified" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="Cities" Relationship="MatrimonydbModel.FK_tblCity_tbldistrict" FromRole="District" ToRole="City" />
-          <NavigationProperty Name="State" Relationship="MatrimonydbModel.FK_tbldistrict_tblState" FromRole="District" ToRole="State" />
-          <NavigationProperty Name="PartnerPreferances" Relationship="MatrimonydbModel.FK_tblPartnerPref_tbldistrict" FromRole="District" ToRole="PartnerPreferance" />
-          <NavigationProperty Name="PermanantAddresses" Relationship="MatrimonydbModel.FK_tblPermanantAddress_District" FromRole="District" ToRole="PermanantAddress" />
-          <NavigationProperty Name="Users" Relationship="MatrimonydbModel.FK_tblUser_tbldistrict" FromRole="District" ToRole="User" />
-          <NavigationProperty Name="WorkAddresses" Relationship="MatrimonydbModel.FK_WorkAddress_District" FromRole="District" ToRole="WorkAddress" />
         </EntityType>
         <EntityType Name="Education">
           <Key>
@@ -2125,15 +2044,15 @@
           <Property Name="DateModified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
           <NavigationProperty Name="Annualincome" Relationship="MatrimonydbModel.FK_tblPartnerPref_tblAnnualIncome" FromRole="PartnerPreferance" ToRole="Annualincome" />
-          <NavigationProperty Name="City" Relationship="MatrimonydbModel.FK_tblPartnerPref_tblCity" FromRole="PartnerPreferance" ToRole="City" />
-          <NavigationProperty Name="Country" Relationship="MatrimonydbModel.FK_tblPartnerPref_tblCountry" FromRole="PartnerPreferance" ToRole="Country" />
-          <NavigationProperty Name="District" Relationship="MatrimonydbModel.FK_tblPartnerPref_tbldistrict" FromRole="PartnerPreferance" ToRole="District" />
           <NavigationProperty Name="Education" Relationship="MatrimonydbModel.FK_tblPartnerPref_tblEducation" FromRole="PartnerPreferance" ToRole="Education" />
           <NavigationProperty Name="EmploymentType" Relationship="MatrimonydbModel.FK_tblPartnerPref_tblEmpType" FromRole="PartnerPreferance" ToRole="EmploymentType" />
           <NavigationProperty Name="Occupation" Relationship="MatrimonydbModel.FK_tblPartnerPref_tblOccupation" FromRole="PartnerPreferance" ToRole="Occupation" />
           <NavigationProperty Name="Star" Relationship="MatrimonydbModel.FK_tblPartnerPref_tblStars" FromRole="PartnerPreferance" ToRole="Star" />
-          <NavigationProperty Name="State" Relationship="MatrimonydbModel.FK_tblPartnerPref_tblState" FromRole="PartnerPreferance" ToRole="State" />
           <NavigationProperty Name="User" Relationship="MatrimonydbModel.FK_tblPartnerPref_tblUser" FromRole="PartnerPreferance" ToRole="User" />
+          <NavigationProperty Name="City" Relationship="MatrimonydbModel.FK_tblPartnerPref_tblCity" FromRole="PartnerPreferance" ToRole="City" />
+          <NavigationProperty Name="Country" Relationship="MatrimonydbModel.FK_tblPartnerPref_tblCountry" FromRole="PartnerPreferance" ToRole="Country" />
+          <NavigationProperty Name="District" Relationship="MatrimonydbModel.FK_tblPartnerPref_tbldistrict" FromRole="PartnerPreferance" ToRole="District" />
+          <NavigationProperty Name="State" Relationship="MatrimonydbModel.FK_tblPartnerPref_tblState" FromRole="PartnerPreferance" ToRole="State" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -2165,11 +2084,11 @@
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="DateModified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="MatrimonydbModel.FK_PermanantAddress_User" FromRole="PermanantAddress" ToRole="User" />
           <NavigationProperty Name="City" Relationship="MatrimonydbModel.FK_PermanantAddress_City" FromRole="PermanantAddress" ToRole="City" />
           <NavigationProperty Name="Country" Relationship="MatrimonydbModel.FK_PermanantAddress_Country" FromRole="PermanantAddress" ToRole="Country" />
           <NavigationProperty Name="District" Relationship="MatrimonydbModel.FK_tblPermanantAddress_District" FromRole="PermanantAddress" ToRole="District" />
           <NavigationProperty Name="State" Relationship="MatrimonydbModel.FK_PermanantAddress_State" FromRole="PermanantAddress" ToRole="State" />
-          <NavigationProperty Name="User" Relationship="MatrimonydbModel.FK_PermanantAddress_User" FromRole="PermanantAddress" ToRole="User" />
         </EntityType>
         <EntityType Name="PhysicalProfileInfo">
           <Key>
@@ -2246,8 +2165,8 @@
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="DateModified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="Casts" Relationship="MatrimonydbModel.FK_Cast_Religion" FromRole="Religion" ToRole="Cast" />
           <NavigationProperty Name="Users" Relationship="MatrimonydbModel.FK_tblUser_tblReligion" FromRole="Religion" ToRole="User" />
+          <NavigationProperty Name="Casts" Relationship="MatrimonydbModel.FK_Cast_Religion" FromRole="Religion" ToRole="Cast" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -2272,24 +2191,6 @@
           <Property Name="DateModified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
           <NavigationProperty Name="PartnerPreferances" Relationship="MatrimonydbModel.FK_tblPartnerPref_tblStars" FromRole="Star" ToRole="PartnerPreferance" />
-        </EntityType>
-        <EntityType Name="State">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CountryId" Type="Int32" Nullable="false" />
-          <Property Name="StateorCounty" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="DateCreated" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="DateModified" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="Country" Relationship="MatrimonydbModel.FK_tblState_tblCountry" FromRole="State" ToRole="Country" />
-          <NavigationProperty Name="Districts" Relationship="MatrimonydbModel.FK_tbldistrict_tblState" FromRole="State" ToRole="District" />
-          <NavigationProperty Name="PartnerPreferances" Relationship="MatrimonydbModel.FK_tblPartnerPref_tblState" FromRole="State" ToRole="PartnerPreferance" />
-          <NavigationProperty Name="PermanantAddresses" Relationship="MatrimonydbModel.FK_PermanantAddress_State" FromRole="State" ToRole="PermanantAddress" />
-          <NavigationProperty Name="Users" Relationship="MatrimonydbModel.FK_tblUser_tblState" FromRole="State" ToRole="User" />
-          <NavigationProperty Name="WorkAddresses" Relationship="MatrimonydbModel.FK_WorkAddress_State" FromRole="State" ToRole="WorkAddress" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -2333,10 +2234,6 @@
           <Property Name="ModifiedBy" Type="Int32" />
           <Property Name="Termsandconditions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="GUID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Cast" Relationship="MatrimonydbModel.FK_tblUser_tblCast" FromRole="User" ToRole="Cast" />
-          <NavigationProperty Name="City" Relationship="MatrimonydbModel.FK_tblUser_tblCity" FromRole="User" ToRole="City" />
-          <NavigationProperty Name="Country" Relationship="MatrimonydbModel.FK_tblUser_tblCountry" FromRole="User" ToRole="Country" />
-          <NavigationProperty Name="District" Relationship="MatrimonydbModel.FK_tblUser_tbldistrict" FromRole="User" ToRole="District" />
           <NavigationProperty Name="FamilyDetails" Relationship="MatrimonydbModel.FK_tblFamilyDetails_tblUser" FromRole="User" ToRole="FamilyDetail" />
           <NavigationProperty Name="Gender" Relationship="MatrimonydbModel.FK_tblUser_tblGender" FromRole="User" ToRole="Gender" />
           <NavigationProperty Name="Language" Relationship="MatrimonydbModel.FK_tblUser_tblLanguage" FromRole="User" ToRole="Language" />
@@ -2348,7 +2245,6 @@
           <NavigationProperty Name="ProfileFor" Relationship="MatrimonydbModel.FK_tblUser_tblProfileFor" FromRole="User" ToRole="ProfileFor" />
           <NavigationProperty Name="Religion" Relationship="MatrimonydbModel.FK_tblUser_tblReligion" FromRole="User" ToRole="Religion" />
           <NavigationProperty Name="Role" Relationship="MatrimonydbModel.FK_tblUser_tblRole" FromRole="User" ToRole="Role" />
-          <NavigationProperty Name="State" Relationship="MatrimonydbModel.FK_tblUser_tblState" FromRole="User" ToRole="State" />
           <NavigationProperty Name="UserInterestedInProfiles" Relationship="MatrimonydbModel.FK_tblUserInterestInProfile_tblUser" FromRole="User" ToRole="UserInterestedInProfile" />
           <NavigationProperty Name="UserInterestedInProfiles1" Relationship="MatrimonydbModel.FK_tblUserInterestInProfile_tblUser1" FromRole="User" ToRole="UserInterestedInProfile" />
           <NavigationProperty Name="UserPackages" Relationship="MatrimonydbModel.FK_tblUserPackage_tblUser" FromRole="User" ToRole="UserPackage" />
@@ -2356,6 +2252,10 @@
           <NavigationProperty Name="VendorForClients" Relationship="MatrimonydbModel.FK_tblVendorclients_tblUser" FromRole="User" ToRole="VendorForClient" />
           <NavigationProperty Name="VendorForClients1" Relationship="MatrimonydbModel.FK_tblVendorclients_tblUser1" FromRole="User" ToRole="VendorForClient" />
           <NavigationProperty Name="WorkAddresses" Relationship="MatrimonydbModel.FK_WorkAddress_User" FromRole="User" ToRole="WorkAddress" />
+          <NavigationProperty Name="City" Relationship="MatrimonydbModel.FK_tblUser_tblCity" FromRole="User" ToRole="City" />
+          <NavigationProperty Name="Country" Relationship="MatrimonydbModel.FK_tblUser_tblCountry" FromRole="User" ToRole="Country" />
+          <NavigationProperty Name="District" Relationship="MatrimonydbModel.FK_tblUser_tbldistrict" FromRole="User" ToRole="District" />
+          <NavigationProperty Name="State" Relationship="MatrimonydbModel.FK_tblUser_tblState" FromRole="User" ToRole="State" />
         </EntityType>
         <EntityType Name="UserInterestedInProfile">
           <Key>
@@ -2431,11 +2331,11 @@
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="DateModified" Type="DateTime" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="MatrimonydbModel.FK_WorkAddress_User" FromRole="WorkAddress" ToRole="User" />
           <NavigationProperty Name="City" Relationship="MatrimonydbModel.FK_WorkAddress_City" FromRole="WorkAddress" ToRole="City" />
           <NavigationProperty Name="Country" Relationship="MatrimonydbModel.FK_WorkAddress_Country" FromRole="WorkAddress" ToRole="Country" />
           <NavigationProperty Name="District" Relationship="MatrimonydbModel.FK_WorkAddress_District" FromRole="WorkAddress" ToRole="District" />
           <NavigationProperty Name="State" Relationship="MatrimonydbModel.FK_WorkAddress_State" FromRole="WorkAddress" ToRole="State" />
-          <NavigationProperty Name="User" Relationship="MatrimonydbModel.FK_WorkAddress_User" FromRole="WorkAddress" ToRole="User" />
         </EntityType>
         <Association Name="FK_PhysicalProfileInfo_AnnualIncome">
           <End Type="MatrimonydbModel.Annualincome" Role="Annualincome" Multiplicity="0..1" />
@@ -2473,90 +2373,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Cast_Religion">
-          <End Type="MatrimonydbModel.Religion" Role="Religion" Multiplicity="0..1" />
-          <End Type="MatrimonydbModel.Cast" Role="Cast" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Religion">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Cast">
-              <PropertyRef Name="ReligionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblUser_tblCast">
-          <End Type="MatrimonydbModel.Cast" Role="Cast" Multiplicity="0..1" />
-          <End Type="MatrimonydbModel.User" Role="User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cast">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="CastId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PermanantAddress_City">
-          <End Type="MatrimonydbModel.City" Role="City" Multiplicity="0..1" />
-          <End Type="MatrimonydbModel.PermanantAddress" Role="PermanantAddress" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PermanantAddress">
-              <PropertyRef Name="CityId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblCity_tbldistrict">
-          <End Type="MatrimonydbModel.District" Role="District" Multiplicity="1" />
-          <End Type="MatrimonydbModel.City" Role="City" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="District">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="City">
-              <PropertyRef Name="DistrictId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblPartnerPref_tblCity">
-          <End Type="MatrimonydbModel.City" Role="City" Multiplicity="0..1" />
-          <End Type="MatrimonydbModel.PartnerPreferance" Role="PartnerPreferance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PartnerPreferance">
-              <PropertyRef Name="CityId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblUser_tblCity">
-          <End Type="MatrimonydbModel.City" Role="City" Multiplicity="0..1" />
-          <End Type="MatrimonydbModel.User" Role="User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="CityId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WorkAddress_City">
-          <End Type="MatrimonydbModel.City" Role="City" Multiplicity="0..1" />
-          <End Type="MatrimonydbModel.WorkAddress" Role="WorkAddress" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="WorkAddress">
-              <PropertyRef Name="CityId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PhysicalProfileInfo_Complexion">
           <End Type="MatrimonydbModel.Complexion" Role="Complexion" Multiplicity="0..1" />
           <End Type="MatrimonydbModel.PhysicalProfileInfo" Role="PhysicalProfileInfo" Multiplicity="*" />
@@ -2566,126 +2382,6 @@
             </Principal>
             <Dependent Role="PhysicalProfileInfo">
               <PropertyRef Name="ComplexionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PermanantAddress_Country">
-          <End Type="MatrimonydbModel.Country" Role="Country" Multiplicity="0..1" />
-          <End Type="MatrimonydbModel.PermanantAddress" Role="PermanantAddress" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PermanantAddress">
-              <PropertyRef Name="CountryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblPartnerPref_tblCountry">
-          <End Type="MatrimonydbModel.Country" Role="Country" Multiplicity="0..1" />
-          <End Type="MatrimonydbModel.PartnerPreferance" Role="PartnerPreferance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PartnerPreferance">
-              <PropertyRef Name="CountryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblState_tblCountry">
-          <End Type="MatrimonydbModel.Country" Role="Country" Multiplicity="1" />
-          <End Type="MatrimonydbModel.State" Role="State" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="State">
-              <PropertyRef Name="CountryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblUser_tblCountry">
-          <End Type="MatrimonydbModel.Country" Role="Country" Multiplicity="0..1" />
-          <End Type="MatrimonydbModel.User" Role="User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="CountryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WorkAddress_Country">
-          <End Type="MatrimonydbModel.Country" Role="Country" Multiplicity="0..1" />
-          <End Type="MatrimonydbModel.WorkAddress" Role="WorkAddress" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="WorkAddress">
-              <PropertyRef Name="CountryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tbldistrict_tblState">
-          <End Type="MatrimonydbModel.State" Role="State" Multiplicity="0..1" />
-          <End Type="MatrimonydbModel.District" Role="District" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="State">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="District">
-              <PropertyRef Name="StateId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblPartnerPref_tbldistrict">
-          <End Type="MatrimonydbModel.District" Role="District" Multiplicity="0..1" />
-          <End Type="MatrimonydbModel.PartnerPreferance" Role="PartnerPreferance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="District">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PartnerPreferance">
-              <PropertyRef Name="DistrictId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblPermanantAddress_District">
-          <End Type="MatrimonydbModel.District" Role="District" Multiplicity="0..1" />
-          <End Type="MatrimonydbModel.PermanantAddress" Role="PermanantAddress" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="District">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PermanantAddress">
-              <PropertyRef Name="DistrictId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblUser_tbldistrict">
-          <End Type="MatrimonydbModel.District" Role="District" Multiplicity="0..1" />
-          <End Type="MatrimonydbModel.User" Role="User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="District">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="DistrictId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WorkAddress_District">
-          <End Type="MatrimonydbModel.District" Role="District" Multiplicity="0..1" />
-          <End Type="MatrimonydbModel.WorkAddress" Role="WorkAddress" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="District">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="WorkAddress">
-              <PropertyRef Name="DistrictId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2881,18 +2577,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblPartnerPref_tblState">
-          <End Type="MatrimonydbModel.State" Role="State" Multiplicity="0..1" />
-          <End Type="MatrimonydbModel.PartnerPreferance" Role="PartnerPreferance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="State">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PartnerPreferance">
-              <PropertyRef Name="StateId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblPartnerPref_tblUser">
           <End Type="MatrimonydbModel.User" Role="User" Multiplicity="0..1" />
           <End Type="MatrimonydbModel.PartnerPreferance" Role="PartnerPreferance" Multiplicity="*" />
@@ -2902,18 +2586,6 @@
             </Principal>
             <Dependent Role="PartnerPreferance">
               <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PermanantAddress_State">
-          <End Type="MatrimonydbModel.State" Role="State" Multiplicity="0..1" />
-          <End Type="MatrimonydbModel.PermanantAddress" Role="PermanantAddress" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="State">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PermanantAddress">
-              <PropertyRef Name="StateId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2986,30 +2658,6 @@
             </Principal>
             <Dependent Role="User">
               <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblUser_tblState">
-          <End Type="MatrimonydbModel.State" Role="State" Multiplicity="0..1" />
-          <End Type="MatrimonydbModel.User" Role="User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="State">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="StateId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WorkAddress_State">
-          <End Type="MatrimonydbModel.State" Role="State" Multiplicity="0..1" />
-          <End Type="MatrimonydbModel.WorkAddress" Role="WorkAddress" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="State">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="WorkAddress">
-              <PropertyRef Name="StateId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3097,6 +2745,332 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Cast">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CastName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ReligionId" Type="Int32" />
+          <NavigationProperty Name="Religion" Relationship="MatrimonydbModel.FK_Cast_Religion" FromRole="Cast" ToRole="Religion" />
+        </EntityType>
+        <Association Name="FK_Cast_Religion">
+          <End Type="MatrimonydbModel.Religion" Role="Religion" Multiplicity="0..1" />
+          <End Type="MatrimonydbModel.Cast" Role="Cast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Religion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cast">
+              <PropertyRef Name="ReligionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DistrictId" Type="Int32" Nullable="false" />
+          <Property Name="CityName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DatecCreated" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="PermanantAddresses" Relationship="MatrimonydbModel.FK_PermanantAddress_City" FromRole="City" ToRole="PermanantAddress" />
+          <NavigationProperty Name="District" Relationship="MatrimonydbModel.FK_tblCity_tbldistrict" FromRole="City" ToRole="District" />
+          <NavigationProperty Name="PartnerPreferances" Relationship="MatrimonydbModel.FK_tblPartnerPref_tblCity" FromRole="City" ToRole="PartnerPreferance" />
+          <NavigationProperty Name="Users" Relationship="MatrimonydbModel.FK_tblUser_tblCity" FromRole="City" ToRole="User" />
+          <NavigationProperty Name="WorkAddresses" Relationship="MatrimonydbModel.FK_WorkAddress_City" FromRole="City" ToRole="WorkAddress" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="PermanantAddresses" Relationship="MatrimonydbModel.FK_PermanantAddress_Country" FromRole="Country" ToRole="PermanantAddress" />
+          <NavigationProperty Name="PartnerPreferances" Relationship="MatrimonydbModel.FK_tblPartnerPref_tblCountry" FromRole="Country" ToRole="PartnerPreferance" />
+          <NavigationProperty Name="States" Relationship="MatrimonydbModel.FK_tblState_tblCountry" FromRole="Country" ToRole="State" />
+          <NavigationProperty Name="Users" Relationship="MatrimonydbModel.FK_tblUser_tblCountry" FromRole="Country" ToRole="User" />
+          <NavigationProperty Name="WorkAddresses" Relationship="MatrimonydbModel.FK_WorkAddress_Country" FromRole="Country" ToRole="WorkAddress" />
+        </EntityType>
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="DistrictName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Cities" Relationship="MatrimonydbModel.FK_tblCity_tbldistrict" FromRole="District" ToRole="City" />
+          <NavigationProperty Name="State" Relationship="MatrimonydbModel.FK_tbldistrict_tblState" FromRole="District" ToRole="State" />
+          <NavigationProperty Name="PartnerPreferances" Relationship="MatrimonydbModel.FK_tblPartnerPref_tbldistrict" FromRole="District" ToRole="PartnerPreferance" />
+          <NavigationProperty Name="PermanantAddresses" Relationship="MatrimonydbModel.FK_tblPermanantAddress_District" FromRole="District" ToRole="PermanantAddress" />
+          <NavigationProperty Name="Users" Relationship="MatrimonydbModel.FK_tblUser_tbldistrict" FromRole="District" ToRole="User" />
+          <NavigationProperty Name="WorkAddresses" Relationship="MatrimonydbModel.FK_WorkAddress_District" FromRole="District" ToRole="WorkAddress" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="StateorCounty" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Country" Relationship="MatrimonydbModel.FK_tblState_tblCountry" FromRole="State" ToRole="Country" />
+          <NavigationProperty Name="Districts" Relationship="MatrimonydbModel.FK_tbldistrict_tblState" FromRole="State" ToRole="District" />
+          <NavigationProperty Name="PartnerPreferances" Relationship="MatrimonydbModel.FK_tblPartnerPref_tblState" FromRole="State" ToRole="PartnerPreferance" />
+          <NavigationProperty Name="PermanantAddresses" Relationship="MatrimonydbModel.FK_PermanantAddress_State" FromRole="State" ToRole="PermanantAddress" />
+          <NavigationProperty Name="Users" Relationship="MatrimonydbModel.FK_tblUser_tblState" FromRole="State" ToRole="User" />
+          <NavigationProperty Name="WorkAddresses" Relationship="MatrimonydbModel.FK_WorkAddress_State" FromRole="State" ToRole="WorkAddress" />
+        </EntityType>
+        <Association Name="FK_PermanantAddress_City">
+          <End Type="MatrimonydbModel.City" Role="City" Multiplicity="0..1" />
+          <End Type="MatrimonydbModel.PermanantAddress" Role="PermanantAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PermanantAddress">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCity_tbldistrict">
+          <End Type="MatrimonydbModel.District" Role="District" Multiplicity="1" />
+          <End Type="MatrimonydbModel.City" Role="City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPartnerPref_tblCity">
+          <End Type="MatrimonydbModel.City" Role="City" Multiplicity="0..1" />
+          <End Type="MatrimonydbModel.PartnerPreferance" Role="PartnerPreferance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PartnerPreferance">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUser_tblCity">
+          <End Type="MatrimonydbModel.City" Role="City" Multiplicity="0..1" />
+          <End Type="MatrimonydbModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkAddress_City">
+          <End Type="MatrimonydbModel.City" Role="City" Multiplicity="0..1" />
+          <End Type="MatrimonydbModel.WorkAddress" Role="WorkAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkAddress">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PermanantAddress_Country">
+          <End Type="MatrimonydbModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="MatrimonydbModel.PermanantAddress" Role="PermanantAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PermanantAddress">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPartnerPref_tblCountry">
+          <End Type="MatrimonydbModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="MatrimonydbModel.PartnerPreferance" Role="PartnerPreferance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PartnerPreferance">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblState_tblCountry">
+          <End Type="MatrimonydbModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="MatrimonydbModel.State" Role="State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="State">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUser_tblCountry">
+          <End Type="MatrimonydbModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="MatrimonydbModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkAddress_Country">
+          <End Type="MatrimonydbModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="MatrimonydbModel.WorkAddress" Role="WorkAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkAddress">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbldistrict_tblState">
+          <End Type="MatrimonydbModel.State" Role="State" Multiplicity="0..1" />
+          <End Type="MatrimonydbModel.District" Role="District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="District">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPartnerPref_tbldistrict">
+          <End Type="MatrimonydbModel.District" Role="District" Multiplicity="0..1" />
+          <End Type="MatrimonydbModel.PartnerPreferance" Role="PartnerPreferance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PartnerPreferance">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPermanantAddress_District">
+          <End Type="MatrimonydbModel.District" Role="District" Multiplicity="0..1" />
+          <End Type="MatrimonydbModel.PermanantAddress" Role="PermanantAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PermanantAddress">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUser_tbldistrict">
+          <End Type="MatrimonydbModel.District" Role="District" Multiplicity="0..1" />
+          <End Type="MatrimonydbModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkAddress_District">
+          <End Type="MatrimonydbModel.District" Role="District" Multiplicity="0..1" />
+          <End Type="MatrimonydbModel.WorkAddress" Role="WorkAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkAddress">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPartnerPref_tblState">
+          <End Type="MatrimonydbModel.State" Role="State" Multiplicity="0..1" />
+          <End Type="MatrimonydbModel.PartnerPreferance" Role="PartnerPreferance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PartnerPreferance">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PermanantAddress_State">
+          <End Type="MatrimonydbModel.State" Role="State" Multiplicity="0..1" />
+          <End Type="MatrimonydbModel.PermanantAddress" Role="PermanantAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PermanantAddress">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUser_tblState">
+          <End Type="MatrimonydbModel.State" Role="State" Multiplicity="0..1" />
+          <End Type="MatrimonydbModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkAddress_State">
+          <End Type="MatrimonydbModel.State" Role="State" Multiplicity="0..1" />
+          <End Type="MatrimonydbModel.WorkAddress" Role="WorkAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkAddress">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3164,32 +3138,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Casts">
-            <EntityTypeMapping TypeName="MatrimonydbModel.Cast">
-              <MappingFragment StoreEntitySet="Cast">
-                <ScalarProperty Name="ReligionId" ColumnName="ReligionId" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="CastName" ColumnName="CastName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Cities">
-            <EntityTypeMapping TypeName="MatrimonydbModel.City">
-              <MappingFragment StoreEntitySet="City">
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="DatecCreated" ColumnName="DatecCreated" />
-                <ScalarProperty Name="CityName" ColumnName="CityName" />
-                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Complexions">
             <EntityTypeMapping TypeName="MatrimonydbModel.Complexion">
               <MappingFragment StoreEntitySet="Complexion">
@@ -3198,31 +3146,6 @@
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="ComplexionName" ColumnName="ComplexionName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Countries">
-            <EntityTypeMapping TypeName="MatrimonydbModel.Country">
-              <MappingFragment StoreEntitySet="Country">
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Districts">
-            <EntityTypeMapping TypeName="MatrimonydbModel.District">
-              <MappingFragment StoreEntitySet="District">
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
-                <ScalarProperty Name="StateId" ColumnName="StateId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3536,19 +3459,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="States">
-            <EntityTypeMapping TypeName="MatrimonydbModel.State">
-              <MappingFragment StoreEntitySet="State">
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="StateorCounty" ColumnName="StateorCounty" />
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="MatrimonydbModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -3669,6 +3579,74 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="Validate_User" FunctionName="MatrimonydbModel.Store.Validate_User" />
           <FunctionImportMapping FunctionImportName="ValidateUser" FunctionName="MatrimonydbModel.Store.Validate_User" />
+          <EntitySetMapping Name="Casts">
+            <EntityTypeMapping TypeName="MatrimonydbModel.Cast">
+              <MappingFragment StoreEntitySet="Cast">
+                <ScalarProperty Name="ReligionId" ColumnName="ReligionId" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="CastName" ColumnName="CastName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="MatrimonydbModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DatecCreated" ColumnName="DatecCreated" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="MatrimonydbModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Districts">
+            <EntityTypeMapping TypeName="MatrimonydbModel.District">
+              <MappingFragment StoreEntitySet="District">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="MatrimonydbModel.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="StateorCounty" ColumnName="StateorCounty" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -22,9 +22,9 @@ public partial class Religion
     public Religion()
     {
 
-        this.Casts = new HashSet<Cast>();
-
         this.Users = new HashSet<User>();
+
+        this.Casts = new HashSet<Cast>();
 
     }
 
@@ -45,11 +45,11 @@ public partial class Religion
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Cast> Casts { get; set; }
+    public virtual ICollection<User> Users { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<User> Users { get; set; }
+    public virtual ICollection<Cast> Casts { get; set; }
 
 }
 

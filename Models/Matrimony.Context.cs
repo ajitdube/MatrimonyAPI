@@ -39,15 +39,7 @@ public partial class MatrimonydbEntities : DbContext
 
     public virtual DbSet<BodyType> BodyTypes { get; set; }
 
-    public virtual DbSet<Cast> Casts { get; set; }
-
-    public virtual DbSet<City> Cities { get; set; }
-
     public virtual DbSet<Complexion> Complexions { get; set; }
-
-    public virtual DbSet<Country> Countries { get; set; }
-
-    public virtual DbSet<District> Districts { get; set; }
 
     public virtual DbSet<Education> Educations { get; set; }
 
@@ -93,8 +85,6 @@ public partial class MatrimonydbEntities : DbContext
 
     public virtual DbSet<Star> Stars { get; set; }
 
-    public virtual DbSet<State> States { get; set; }
-
     public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
@@ -108,6 +98,16 @@ public partial class MatrimonydbEntities : DbContext
     public virtual DbSet<VendorForClient> VendorForClients { get; set; }
 
     public virtual DbSet<WorkAddress> WorkAddresses { get; set; }
+
+    public virtual DbSet<Cast> Casts { get; set; }
+
+    public virtual DbSet<City> Cities { get; set; }
+
+    public virtual DbSet<Country> Countries { get; set; }
+
+    public virtual DbSet<District> Districts { get; set; }
+
+    public virtual DbSet<State> States { get; set; }
 
 
     public virtual ObjectResult<AddupdateAnnualincome_Result> AddupdateAnnualincome(Nullable<int> id, string annualIncome, Nullable<int> createdBy, Nullable<int> modifiedBy)

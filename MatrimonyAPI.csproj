@@ -104,6 +104,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\DataRecordExtensions.cs" />
+    <Compile Include="App_Start\Materializer.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AnnualincomesController.cs" />
     <Compile Include="Controllers\BodyTypesController.cs" />
@@ -126,9 +128,11 @@
     <Compile Include="Models\Annualincome.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AnnualincomeModel.cs" />
     <Compile Include="Models\BodyType.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BodyTypeModel.cs" />
     <Compile Include="Models\Cast.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
@@ -138,6 +142,8 @@
     <Compile Include="Models\Complexion.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ComplexionModel.cs" />
+    <Compile Include="Models\CountriesModel.cs" />
     <Compile Include="Models\Country.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
@@ -147,9 +153,11 @@
     <Compile Include="Models\Education.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EducationModel.cs" />
     <Compile Include="Models\EmploymentType.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmploymentTypeModel.cs" />
     <Compile Include="Models\EncryptionDecryption.cs" />
     <Compile Include="Models\FamilyDetail.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
@@ -157,18 +165,23 @@
     <Compile Include="Models\FamilyStatu.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FamilyStatusModel.cs" />
     <Compile Include="Models\FamilyType.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FamilyTypeModel.cs" />
     <Compile Include="Models\Gender.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GenderModel.cs" />
     <Compile Include="Models\Height.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HeightModel.cs" />
     <Compile Include="Models\Language.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LanguageModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Matrimony.Context.cs">
       <AutoGen>True</AutoGen>
@@ -191,6 +204,7 @@
     <Compile Include="Models\Occupation.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OccupationModel.cs" />
     <Compile Include="Models\Otp.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
@@ -212,17 +226,21 @@
     <Compile Include="Models\PhysicalStatu.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PhysicalStatusModel.cs" />
     <Compile Include="Models\ProfileFor.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProfileForModel.cs" />
     <Compile Include="Models\QA.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Register.cs" />
+    <Compile Include="Models\RegisterDetailsModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\Religion.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReligionModel.cs" />
     <Compile Include="Models\Role.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
@@ -235,6 +253,7 @@
     <Compile Include="Models\Star.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StarModel.cs" />
     <Compile Include="Models\State.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>

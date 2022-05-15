@@ -52,12 +52,6 @@ public partial class PartnerPreferance
 
     public virtual Annualincome Annualincome { get; set; }
 
-    public virtual City City { get; set; }
-
-    public virtual Country Country { get; set; }
-
-    public virtual District District { get; set; }
-
     public virtual Education Education { get; set; }
 
     public virtual EmploymentType EmploymentType { get; set; }
@@ -66,9 +60,15 @@ public partial class PartnerPreferance
 
     public virtual Star Star { get; set; }
 
-    public virtual State State { get; set; }
-
     public virtual User User { get; set; }
+
+    public virtual City City { get; set; }
+
+    public virtual Country Country { get; set; }
+
+    public virtual District District { get; set; }
+
+    public virtual State State { get; set; }
 
 }
 

@@ -49,6 +49,8 @@ public partial class State
 
     public Nullable<int> ModifiedBy { get; set; }
 
+    public Nullable<bool> IsActive { get; set; }
+
 
 
     public virtual Country Country { get; set; }

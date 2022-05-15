@@ -17,13 +17,11 @@ namespace MatrimonyAPI.Controllers
     {
         private MatrimonydbEntities db = new MatrimonydbEntities();
 
-        // GET: api/Casts
-        public IQueryable<Cast> GetCasts()
-        {
-            return db.Casts;
-        }
+    
 
         // GET: api/Casts/5
+        //[HttpGet]
+        //[Route("api/Casts")]
         [ResponseType(typeof(Cast))]
         public async Task<IHttpActionResult> GetCast(int id)
         {

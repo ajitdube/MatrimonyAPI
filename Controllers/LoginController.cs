@@ -67,21 +67,21 @@ namespace MatrimonyAPI.Controllers
                 var toEmail = new MailAddress(user.EmailId);
 
 
-                var smtp = new SmtpClient();
-                smtp.Host = "smtp.gmail.com";
-                smtp.Port = 587;
-                smtp.EnableSsl = true;
-                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                smtp.UseDefaultCredentials = true;
-                smtp.Credentials = new NetworkCredential(fromMail.Address, fromEmailpassword);
+                //var smtp = new SmtpClient();
+                //smtp.Host = "smtp.gmail.com";
+                //smtp.Port = 587;
+                //smtp.EnableSsl = true;
+                //smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                //smtp.UseDefaultCredentials = true;
+                //smtp.Credentials = new NetworkCredential(fromMail.Address, fromEmailpassword);
                 
-                var Message = new MailMessage(fromMail, toEmail);
-                Message.Subject = "Registration Completed-Demo";
-                Message.Body = "<br/> Your registration completed succesfully." +
-                               "<br/> please click on the below link for account verification" +
-                               "<br/><br/><a href=" + link + ">" + link + "</a>";
-                Message.IsBodyHtml = true;
-                smtp.Send(Message);
+                //var Message = new MailMessage(fromMail, toEmail);
+                //Message.Subject = "Registration Completed-Demo";
+                //Message.Body = "<br/> Your registration completed succesfully." +
+                //               "<br/> please click on the below link for account verification" +
+                //               "<br/><br/><a href=" + link + ">" + link + "</a>";
+                //Message.IsBodyHtml = true;
+                //smtp.Send(Message);
 
             }
 
