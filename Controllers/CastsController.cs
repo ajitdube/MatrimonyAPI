@@ -25,7 +25,10 @@ namespace MatrimonyAPI.Controllers
         [ResponseType(typeof(Cast))]
         public async Task<IHttpActionResult> GetCast(int id)
         {
-            Cast cast = await db.Casts.FindAsync(id);
+            //Cast cast = await db.Casts.FindAsync(id);
+
+            var cast = await db.Casts.Where(x => x.ReligionId == id )
+                .Select(x => new { x.Id, x.ReligionId, x.CastName }).ToListAsync();
             if (cast == null)
             {
                 return NotFound();

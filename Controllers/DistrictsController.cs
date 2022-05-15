@@ -27,7 +27,10 @@ namespace MatrimonyAPI.Controllers
         [ResponseType(typeof(District))]
         public async Task<IHttpActionResult> GetDistrict(int id)
         {
-            District district = await db.Districts.FindAsync(id);
+          //  District district = await db.Districts.FindAsync(id);
+
+          var district = await db.Districts.Where(x => x.StateId == id && x.IsActive == true)
+                .Select(x => new { x.Id, x.StateId, x.DistrictName }).ToListAsync();
             if (district == null)
             {
                 return NotFound();

@@ -147,40 +147,7 @@ namespace MatrimonyAPI.Controllers
             finally
             {
                 db.Database.Connection.Close();
-            }
-
-        
-
-          
-         //   // ProfileForModel pm = new ProfileForModel();
-
-         ////   List<ProfileFor> pm =  db.ProfileFors.ToList();
-         //   rg.profilefor = db.ProfileFors.ToList();
-         //   rg.gender = db.Genders.ToList<Gender>();
-
-
-
-
-
-         //   rg.religion =  db.Religions.ToList();
-         //   rg.country = db.Countries.AsEnumerable();
-         //   rg.state = db.States.AsEnumerable();
-         //   rg.district = db.Districts.AsEnumerable();
-         //   rg.city = db.Cities.AsEnumerable();
-         //   rg.bodytype = db.BodyTypes.AsEnumerable();
-         //   rg.complexion = db.Complexions.AsEnumerable();
-         //   rg.physics_status = db.PhysicalStatus.AsEnumerable();
-         //   rg.height = db.Heights.AsEnumerable();
-         //   rg.highest_education = db.Educations.AsEnumerable();
-         //   rg.employee_type = db.EmploymentTypes.AsEnumerable();
-         //   rg.occupation = db.Occupations.AsEnumerable();
-         //   rg.annualincome = db.Annualincomes.AsEnumerable();
-         //   rg.familytype = db.FamilyTypes.AsEnumerable();
-         //   rg.familystatus = db.FamilyStatus.AsEnumerable();
-         //   rg.star = db.Stars.AsEnumerable();
-
-         //   // return   rg;
-         //   return Ok(rg);
+            }       
         }
 
 

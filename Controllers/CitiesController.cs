@@ -27,7 +27,11 @@ namespace MatrimonyAPI.Controllers
         [ResponseType(typeof(City))]
         public async Task<IHttpActionResult> GetCity(int id)
         {
-            City city = await db.Cities.FindAsync(id);
+            //  City city = await db.Cities.FindAsync(id);
+            var city = await db.Cities.Where(x => x.DistrictId == id && x.IsActive == true)
+               .Select(x => new { x.Id, x.DistrictId, x.CityName }).ToListAsync();
+     
+
             if (city == null)
             {
                 return NotFound();
