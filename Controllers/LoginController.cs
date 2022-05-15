@@ -62,7 +62,7 @@ namespace MatrimonyAPI.Controllers
                 var GenarateUserVerificationLink = "/Register/UserVerification/";
                 var link = "";
 
-                var fromMail = new MailAddress("noreplyreceiptscan@gmail.com", "gmail@123"); // set your email    
+                var fromMail = new MailAddress("noreplyreceiptscan@gmail.com", "kolkdpavblcezlun"); // set your email    
                 var fromEmailpassword = "*******"; // Set your password     
                 var toEmail = new MailAddress(user.EmailId);
 
