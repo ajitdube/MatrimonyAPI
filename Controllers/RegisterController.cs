@@ -87,9 +87,7 @@ namespace MatrimonyAPI.Controllers
                 List<HeightModel> _listOfHeight =
                 ((IObjectContextAdapter)db).ObjectContext.Translate<HeightModel>
         (reader).ToList();
-
                 reader.NextResult();
-
                 List<EducationModel> _listOfEducation =
                 ((IObjectContextAdapter)db).ObjectContext.Translate<EducationModel>
         (reader).ToList();
