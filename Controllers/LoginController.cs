@@ -66,6 +66,7 @@ namespace MatrimonyAPI.Controllers
                 var fromEmailpassword = "*******"; // Set your password     
                 var toEmail = new MailAddress(user.EmailId);
 
+
                 var smtp = new SmtpClient();
                 smtp.Host = "smtp.gmail.com";
                 smtp.Port = 587;
