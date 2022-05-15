@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5630e14cb44f4e0788fad7ca6cf33ee8" Name="Diagram1">
+        <EntityTypeShape EntityType="MatrimonydbModel.Annualincome" Width="1.5" PointX="9.75" PointY="34.5" />
+        <EntityTypeShape EntityType="MatrimonydbModel.BodyType" Width="1.5" PointX="15.75" PointY="42.375" />
+        <EntityTypeShape EntityType="MatrimonydbModel.Cast" Width="1.5" PointX="7.5" PointY="16.5" />
+        <EntityTypeShape EntityType="MatrimonydbModel.City" Width="1.5" PointX="7.5" PointY="26.25" />
+        <EntityTypeShape EntityType="MatrimonydbModel.Complexion" Width="1.5" PointX="15.75" PointY="39.25" />
+        <EntityTypeShape EntityType="MatrimonydbModel.Country" Width="1.5" PointX="0.75" PointY="26.375" />
+        <EntityTypeShape EntityType="MatrimonydbModel.District" Width="1.5" PointX="5.25" PointY="26.125" />
+        <EntityTypeShape EntityType="MatrimonydbModel.Education" Width="1.5" PointX="9.75" PointY="41.125" />
+        <EntityTypeShape EntityType="MatrimonydbModel.EmploymentType" Width="1.5" PointX="9.75" PointY="37.875" />
+        <EntityTypeShape EntityType="MatrimonydbModel.FamilyDetail" Width="1.5" PointX="12" PointY="31.625" />
+        <EntityTypeShape EntityType="MatrimonydbModel.FamilyStatu" Width="1.5" PointX="9.75" PointY="48.25" />
+        <EntityTypeShape EntityType="MatrimonydbModel.FamilyType" Width="1.5" PointX="9.75" PointY="45.25" />
+        <EntityTypeShape EntityType="MatrimonydbModel.Gender" Width="1.5" PointX="7.5" PointY="31" />
+        <EntityTypeShape EntityType="MatrimonydbModel.Height" Width="1.5" PointX="15.75" PointY="16.125" />
+        <EntityTypeShape EntityType="MatrimonydbModel.Language" Width="1.5" PointX="7.5" PointY="37.125" />
+        <EntityTypeShape EntityType="MatrimonydbModel.Notification" Width="1.5" PointX="12" PointY="16.125" />
+        <EntityTypeShape EntityType="MatrimonydbModel.Occupation" Width="1.5" PointX="9.75" PointY="19.125" />
+        <EntityTypeShape EntityType="MatrimonydbModel.Otp" Width="1.5" PointX="12" PointY="19.625" />
+        <EntityTypeShape EntityType="MatrimonydbModel.Package" Width="1.5" PointX="12.75" PointY="37.5" />
+        <EntityTypeShape EntityType="MatrimonydbModel.PartnerPreferance" Width="1.5" PointX="12" PointY="25" />
+        <EntityTypeShape EntityType="MatrimonydbModel.Payment" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MatrimonydbModel.PermanantAddress" Width="1.5" PointX="15" PointY="25.75" />
+        <EntityTypeShape EntityType="MatrimonydbModel.PhysicalProfileInfo" Width="1.5" PointX="18" PointY="25.125" />
+        <EntityTypeShape EntityType="MatrimonydbModel.PhysicalStatu" Width="1.5" PointX="15.75" PointY="36.25" />
+        <EntityTypeShape EntityType="MatrimonydbModel.ProfileFor" Width="1.5" PointX="7.5" PointY="20.375" />
+        <EntityTypeShape EntityType="MatrimonydbModel.QA" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MatrimonydbModel.Religion" Width="1.5" PointX="5.25" PointY="16.5" />
+        <EntityTypeShape EntityType="MatrimonydbModel.Role" Width="1.5" PointX="7.5" PointY="34" />
+        <EntityTypeShape EntityType="MatrimonydbModel.Star" Width="1.5" PointX="9.75" PointY="15.5" />
+        <EntityTypeShape EntityType="MatrimonydbModel.State" Width="1.5" PointX="3" PointY="26.125" />
+        <EntityTypeShape EntityType="MatrimonydbModel.sysdiagram" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MatrimonydbModel.User" Width="1.5" PointX="9.75" PointY="22.5" />
+        <EntityTypeShape EntityType="MatrimonydbModel.UserInterestedInProfile" Width="1.5" PointX="12" PointY="50.875" />
+        <EntityTypeShape EntityType="MatrimonydbModel.UserPackage" Width="1.5" PointX="15" PointY="31.375" />
+        <EntityTypeShape EntityType="MatrimonydbModel.UserPhoto" Width="1.5" PointX="12" PointY="43.75" />
+        <EntityTypeShape EntityType="MatrimonydbModel.VendorForClient" Width="1.5" PointX="12" PointY="54.375" />
+        <EntityTypeShape EntityType="MatrimonydbModel.WorkAddress" Width="1.5" PointX="15" PointY="19.75" />
+        <AssociationConnector Association="MatrimonydbModel.FK_PhysicalProfileInfo_AnnualIncome" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblPartnerPref_tblAnnualIncome" />
+        <AssociationConnector Association="MatrimonydbModel.FK_PhysicalProfileInfo_Bodytype" />
+        <AssociationConnector Association="MatrimonydbModel.FK_Cast_Religion" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblUser_tblCast" />
+        <AssociationConnector Association="MatrimonydbModel.FK_PermanantAddress_City" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblCity_tbldistrict" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblPartnerPref_tblCity" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblUser_tblCity" />
+        <AssociationConnector Association="MatrimonydbModel.FK_WorkAddress_City" />
+        <AssociationConnector Association="MatrimonydbModel.FK_PhysicalProfileInfo_Complexion" />
+        <AssociationConnector Association="MatrimonydbModel.FK_PermanantAddress_Country" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblPartnerPref_tblCountry" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblState_tblCountry" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblUser_tblCountry" />
+        <AssociationConnector Association="MatrimonydbModel.FK_WorkAddress_Country" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tbldistrict_tblState" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblPartnerPref_tbldistrict" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblPermanantAddress_District" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblUser_tbldistrict" />
+        <AssociationConnector Association="MatrimonydbModel.FK_WorkAddress_District" />
+        <AssociationConnector Association="MatrimonydbModel.FK_PhysicalProfileInfo_Education" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblPartnerPref_tblEducation" />
+        <AssociationConnector Association="MatrimonydbModel.FK_PhysicalProfileInfo_EmploymentType" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblPartnerPref_tblEmpType" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblFamilyDetails_tblFamilyStatus" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblFamilyDetails_tblFamilyType" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblFamilyDetails_tblUser" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblUser_tblGender" />
+        <AssociationConnector Association="MatrimonydbModel.FK_PhysicalProfileInfo_Height" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblUser_tblLanguage" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblNotification_tblUser" />
+        <AssociationConnector Association="MatrimonydbModel.FK_PhysicalProfileInfo_Occupation" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblPartnerPref_tblOccupation" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblOtp_tblUser" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblUserPackage_tblPackages" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblPartnerPref_tblStars" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblPartnerPref_tblState" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblPartnerPref_tblUser" />
+        <AssociationConnector Association="MatrimonydbModel.FK_PermanantAddress_State" />
+        <AssociationConnector Association="MatrimonydbModel.FK_PermanantAddress_User" />
+        <AssociationConnector Association="MatrimonydbModel.FK_PhysicalProfileInfo_PhysicalStatus" />
+        <AssociationConnector Association="MatrimonydbModel.FK_PhysicalProfileInfo_User" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblUser_tblProfileFor" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblUser_tblReligion" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblUser_tblRole" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblUser_tblState" />
+        <AssociationConnector Association="MatrimonydbModel.FK_WorkAddress_State" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblUserInterestInProfile_tblUser" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblUserInterestInProfile_tblUser1" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblUserPackage_tblUser" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblUserPhoto_tblUser" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblVendorclients_tblUser" />
+        <AssociationConnector Association="MatrimonydbModel.FK_tblVendorclients_tblUser1" />
+        <AssociationConnector Association="MatrimonydbModel.FK_WorkAddress_User" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
