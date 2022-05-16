@@ -16,8 +16,7 @@ namespace MatrimonyAPI.Controllers
     public class CastsController : ApiController
     {
         private MatrimonydbEntities db = new MatrimonydbEntities();
-
-    
+          
 
         // GET: api/Casts/5
         //[HttpGet]
