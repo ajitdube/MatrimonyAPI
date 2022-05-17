@@ -12,6 +12,8 @@ namespace MatrimonyAPI.Models
         public virtual FamilyDetailModel familydetail { get; set; }
         public virtual PartnerPreferanceModel partnerpreferance { get; set; }
         public virtual PermanantAddressModel permanantaddress { get; set; }
+        public virtual WorkAddressModel workasddress  { get; set; }
+        
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
     }

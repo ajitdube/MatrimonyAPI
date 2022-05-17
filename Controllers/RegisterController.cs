@@ -409,6 +409,43 @@ namespace MatrimonyAPI.Controllers
                     };
                     db.PermanantAddresses.Add(Peradd);
                 }
+
+                // work 
+
+                if (db.WorkAddresses.Any(e => e.UserId == reg.UserID))
+                {
+                    var WorkAddr = await db.WorkAddresses.Where(x => x.UserId == reg.UserID).FirstOrDefaultAsync();
+                    WorkAddr.Address1 = reg.workasddress.Address1;
+                    WorkAddr.Address2 = reg.workasddress.Address2;
+                    WorkAddr.CountryId = reg.workasddress.CountryId;
+                    WorkAddr.StateId = reg.workasddress.StateId;
+                    WorkAddr.DistrictId = reg.workasddress.DistrictId;
+                    WorkAddr.CityId = reg.workasddress.CityId;
+                    WorkAddr.AddressType = reg.workasddress.AddressType;
+                    WorkAddr.ModifiedBy = reg.ModifiedBy;
+                    WorkAddr.DateModified = DateTime.Now;
+                    db.Entry(WorkAddr).State = EntityState.Modified;
+                }
+                else
+                {
+                    WorkAddress Wrkadd = new WorkAddress
+                    {
+                        Address1 = reg.workasddress.Address1,
+                        Address2= reg.workasddress.Address2,
+                        CountryId = reg.workasddress.CountryId,
+                        StateId = reg.workasddress.StateId,
+                        DistrictId = reg.workasddress.DistrictId,
+                        CityId = reg.workasddress.CityId,
+                        AddressType = reg.workasddress.AddressType,       
+                        UserId = reg.UserID,
+                        DateCreated = DateTime.Now,
+                        CreatedBy = reg.CreatedBy,
+                        ModifiedBy = reg.ModifiedBy,
+                        DateModified = DateTime.Now
+                    };
+                    db.WorkAddresses.Add(Wrkadd);
+                }
+
                 await db.SaveChangesAsync();
                 scope.Complete();
 
