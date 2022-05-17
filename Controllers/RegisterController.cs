@@ -245,77 +245,12 @@ namespace MatrimonyAPI.Controllers
             {
                 return BadRequest();
             }
-            PhysicalProfileInfo Ppinfo = new PhysicalProfileInfo
-            {
-                BodyTypeId = reg.physicalprofileinfo.BodyTypeId,
-                ComplexionId = reg.physicalprofileinfo.ComplexionId,
-                PhysicalStatusId = reg.physicalprofileinfo.PhysicalStatusId,
-                HeightId = reg.physicalprofileinfo.HeightId,
-                Weight = reg.physicalprofileinfo.Weight,
-                EducationId = reg.physicalprofileinfo.EducationId,
-                EmploymentTypeId = reg.physicalprofileinfo.EmploymentTypeId,
-                OccupationId = reg.physicalprofileinfo.OccupationId,
-                AnnualIncomeId = reg.physicalprofileinfo.AnnualIncomeId,
-                UserId =reg.UserID,
-                DateCreated= DateTime.Now,
-                CreatedBy = reg.CreatedBy,
-                ModofiedBy = reg.ModifiedBy,
-                DateModified = DateTime.Now
-            };
+           
 
-            FamilyDetail Fmdtl = new FamilyDetail
-            {
+           
 
-                FamilytypeId = reg.familydetail.FamilytypeId,
-                FamilystatusId = reg.familydetail.FamilystatusId,
-                FathersSurname = reg.familydetail.FathersSurname,
-                FathersName = reg.familydetail.FathersName,
-                FathersOccupation = reg.familydetail.FathersOccupation,
-                MothersSurname = reg.familydetail.MothersSurname,
-                MothersName = reg.familydetail.MothersName,
-                MothersOccupation = reg.familydetail.MothersOccupation,
-                NoOfSisters = reg.familydetail.NoOfSisters,
-                NoOfBrothers = reg.familydetail.NoOfBrothers,
-                UserId = reg.UserID,
-                DateCreated = DateTime.Now,
-                CreatedBy = reg.CreatedBy,
-                ModifiedBy = reg.ModifiedBy,
-                DateModified = DateTime.Now
-            };
-
-            PartnerPreferance Prtpre = new PartnerPreferance
-            {
-                StarId = reg.partnerpreferance.StarId,
-                EducationId = reg.partnerpreferance.EducationId,
-                EmployeetypeId = reg.partnerpreferance.EmployeetypeId,
-                OccupationId = reg.partnerpreferance.OccupationId,
-                AnnualIncomeId = reg.partnerpreferance.AnnualIncomeId,
-                CountryId = reg.partnerpreferance.CountryId,
-                StateId = reg.partnerpreferance.StateId,
-                DistrictId = reg.partnerpreferance.DistrictId,
-                CityId = reg.partnerpreferance.CityId,
-                UserId = reg.UserID,
-                DateCreated = DateTime.Now,
-                CreatedBy = reg.CreatedBy,
-                ModifiedBy = reg.ModifiedBy,
-                DateModified = DateTime.Now
-            };
-            PermanantAddress Peradd = new PermanantAddress
-            {
-                Address1 = reg.permanantaddress.Address1,
-                Address2 = reg.permanantaddress.Address2,
-                CountryId = reg.permanantaddress.CountryId,
-                StateId = reg.permanantaddress.StateId,
-                CityId = reg.permanantaddress.CityId,
-                AddressType = reg.permanantaddress.AddressType,
-                DistrictId = reg.permanantaddress.DistrictId,
-                UserId = reg.UserID,
-                DateCreated = DateTime.Now,
-                CreatedBy = reg.CreatedBy,
-                ModifiedBy = reg.ModifiedBy,
-                DateModified = DateTime.Now
-
-            };
+       
+          
 
             using (var scope = new TransactionScope(
      TransactionScopeOption.RequiresNew, new TransactionOptions()
@@ -325,35 +260,153 @@ namespace MatrimonyAPI.Controllers
             {
                 if (db.PhysicalProfileInfoes.Any(e => e.UserId == reg.UserID))
                 {
-                    db.Entry(Ppinfo).State = EntityState.Modified;
+                    var PhyProInfo = await db.PhysicalProfileInfoes.Where(x => x.UserId == reg.UserID).FirstOrDefaultAsync();
+                    PhyProInfo.BodyTypeId = reg.physicalprofileinfo.BodyTypeId;
+                    PhyProInfo.ComplexionId = reg.physicalprofileinfo.ComplexionId;
+                    PhyProInfo.PhysicalStatusId = reg.physicalprofileinfo.PhysicalStatusId;
+                    PhyProInfo.HeightId = reg.physicalprofileinfo.HeightId;
+                    PhyProInfo.Weight = reg.physicalprofileinfo.Weight;
+                    PhyProInfo.EducationId = reg.physicalprofileinfo.EducationId;
+                    PhyProInfo.EmploymentTypeId = reg.physicalprofileinfo.EmploymentTypeId;
+                    PhyProInfo.OccupationId = reg.physicalprofileinfo.OccupationId;
+                    PhyProInfo.AnnualIncomeId = reg.physicalprofileinfo.AnnualIncomeId;
+                    PhyProInfo.ModofiedBy = reg.ModifiedBy;
+                    PhyProInfo.DateModified = DateTime.Now;                    
+                    db.Entry(PhyProInfo).State = EntityState.Modified;
                 }
                 else
                 {
+                    PhysicalProfileInfo Ppinfo = new PhysicalProfileInfo
+                    {
+                        BodyTypeId = reg.physicalprofileinfo.BodyTypeId,
+                        ComplexionId = reg.physicalprofileinfo.ComplexionId,
+                        PhysicalStatusId = reg.physicalprofileinfo.PhysicalStatusId,
+                        HeightId = reg.physicalprofileinfo.HeightId,
+                        Weight = reg.physicalprofileinfo.Weight,
+                        EducationId = reg.physicalprofileinfo.EducationId,
+                        EmploymentTypeId = reg.physicalprofileinfo.EmploymentTypeId,
+                        OccupationId = reg.physicalprofileinfo.OccupationId,
+                        AnnualIncomeId = reg.physicalprofileinfo.AnnualIncomeId,
+                        UserId = reg.UserID,
+                        DateCreated = DateTime.Now,
+                        CreatedBy = reg.CreatedBy,
+                        ModofiedBy = reg.ModifiedBy,
+                        DateModified = DateTime.Now
+                    };
                     db.PhysicalProfileInfoes.Add(Ppinfo);
                 }
                 if (db.FamilyDetails.Any(e => e.UserId == reg.UserID))
                 {
-                    db.Entry(Fmdtl).State = EntityState.Modified;
+                    var FamlDtl = await db.FamilyDetails.Where(x => x.UserId == reg.UserID).FirstOrDefaultAsync();
+                    FamlDtl.FamilytypeId = reg.familydetail.FamilytypeId;
+                    FamlDtl.FamilystatusId = reg.familydetail.FamilystatusId;
+                    FamlDtl.FathersSurname = reg.familydetail.FathersSurname;
+                    FamlDtl.FathersName = reg.familydetail.FathersName;
+                    FamlDtl.FathersOccupation = reg.familydetail.FathersOccupation;
+                    FamlDtl.MothersSurname = reg.familydetail.MothersSurname;
+                    FamlDtl.MothersName = reg.familydetail.MothersName;
+                    FamlDtl.MothersOccupation = reg.familydetail.MothersOccupation;
+                    FamlDtl.NoOfSisters = reg.familydetail.NoOfSisters;
+                    FamlDtl.NoOfBrothers = reg.familydetail.NoOfBrothers;
+                    FamlDtl.ModifiedBy = reg.ModifiedBy;
+                    FamlDtl.DateModified = DateTime.Now;
+                    db.Entry(FamlDtl).State = EntityState.Modified;
                 }
                 else
                 {
+                    FamilyDetail Fmdtl = new FamilyDetail
+                    {
+
+                        FamilytypeId = reg.familydetail.FamilytypeId,
+                        FamilystatusId = reg.familydetail.FamilystatusId,
+                        FathersSurname = reg.familydetail.FathersSurname,
+                        FathersName = reg.familydetail.FathersName,
+                        FathersOccupation = reg.familydetail.FathersOccupation,
+                        MothersSurname = reg.familydetail.MothersSurname,
+                        MothersName = reg.familydetail.MothersName,
+                        MothersOccupation = reg.familydetail.MothersOccupation,
+                        NoOfSisters = reg.familydetail.NoOfSisters,
+                        NoOfBrothers = reg.familydetail.NoOfBrothers,
+                        UserId = reg.UserID,
+                        DateCreated = DateTime.Now,
+                        CreatedBy = reg.CreatedBy,
+                        ModifiedBy = reg.ModifiedBy,
+                        DateModified = DateTime.Now
+                    };
                     db.FamilyDetails.Add(Fmdtl);
                 }
                 if (db.PartnerPreferances.Any(e => e.UserId == reg.UserID))
                 {
-                    db.Entry(Prtpre).State = EntityState.Modified;
+                    var PartPref = await db.PartnerPreferances.Where(x => x.UserId == reg.UserID).FirstOrDefaultAsync();
+                    PartPref.StarId = reg.partnerpreferance.StarId;
+                    PartPref.EducationId = reg.partnerpreferance.EducationId;
+                    PartPref.EmployeetypeId = reg.partnerpreferance.EmployeetypeId;
+                    PartPref.OccupationId = reg.partnerpreferance.OccupationId;
+                    PartPref.AnnualIncomeId = reg.partnerpreferance.AnnualIncomeId;
+                    PartPref.CountryId = reg.partnerpreferance.CountryId;
+                    PartPref.StateId = reg.partnerpreferance.StateId;
+                    PartPref.DistrictId = reg.partnerpreferance.DistrictId;
+                    PartPref.CityId = reg.partnerpreferance.CityId;
+                    PartPref.ModifiedBy = reg.ModifiedBy;
+                    PartPref.DateModified = DateTime.Now;
+                    db.Entry(PartPref).State = EntityState.Modified;
                 }
                 else
                 {
+                    PartnerPreferance Prtpre = new PartnerPreferance
+                    {
+                        StarId = reg.partnerpreferance.StarId,
+                        EducationId = reg.partnerpreferance.EducationId,
+                        EmployeetypeId = reg.partnerpreferance.EmployeetypeId,
+                        OccupationId = reg.partnerpreferance.OccupationId,
+                        AnnualIncomeId = reg.partnerpreferance.AnnualIncomeId,
+                        CountryId = reg.partnerpreferance.CountryId,
+                        StateId = reg.partnerpreferance.StateId,
+                        DistrictId = reg.partnerpreferance.DistrictId,
+                        CityId = reg.partnerpreferance.CityId,
+                        UserId = reg.UserID,
+                        DateCreated = DateTime.Now,
+                        CreatedBy = reg.CreatedBy,
+                        ModifiedBy = reg.ModifiedBy,
+                        DateModified = DateTime.Now
+                    };
                     db.PartnerPreferances.Add(Prtpre);
                 }
 
                 if (db.PermanantAddresses.Any(e => e.UserId == reg.UserID))
                 {
-                    db.Entry(Peradd).State = EntityState.Modified;
+                    
+                        var PartAddr = await db.PermanantAddresses.Where(x => x.UserId == reg.UserID).FirstOrDefaultAsync();
+                        PartAddr.Address1 = reg.permanantaddress.Address1;
+                        PartAddr.Address2 = reg.permanantaddress.Address2;
+                        PartAddr.CountryId = reg.permanantaddress.CountryId;
+                        PartAddr.StateId = reg.permanantaddress.StateId;
+                        PartAddr.CityId = reg.permanantaddress.CityId;
+                        PartAddr.AddressType = reg.permanantaddress.AddressType;
+                        PartAddr.DistrictId = reg.permanantaddress.DistrictId;
+                        PartAddr.ModifiedBy = reg.ModifiedBy;
+                        PartAddr.DateModified = DateTime.Now;
+                        db.Entry(PartAddr).State = EntityState.Modified;
+                     
                 }
                 else
                 {
+                    PermanantAddress Peradd = new PermanantAddress
+                    {
+                        Address1 = reg.permanantaddress.Address1,
+                        Address2 = reg.permanantaddress.Address2,
+                        CountryId = reg.permanantaddress.CountryId,
+                        StateId = reg.permanantaddress.StateId,
+                        CityId = reg.permanantaddress.CityId,
+                        AddressType = reg.permanantaddress.AddressType,
+                        DistrictId = reg.permanantaddress.DistrictId,
+                        UserId = reg.UserID,
+                        DateCreated = DateTime.Now,
+                        CreatedBy = reg.CreatedBy,
+                        ModifiedBy = reg.ModifiedBy,
+                        DateModified = DateTime.Now
+
+                    };
                     db.PermanantAddresses.Add(Peradd);
                 }
                 await db.SaveChangesAsync();
