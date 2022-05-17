@@ -141,6 +141,7 @@
     <Compile Include="Models\City.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CompleteRegistrationModel.cs" />
     <Compile Include="Models\Complexion.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
@@ -164,6 +165,7 @@
     <Compile Include="Models\FamilyDetail.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FamilyDetailModel.cs" />
     <Compile Include="Models\FamilyStatu.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
@@ -216,15 +218,18 @@
     <Compile Include="Models\PartnerPreferance.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PartnerPreferanceModel.cs" />
     <Compile Include="Models\Payment.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PermanantAddress.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PermanantAddressModel.cs" />
     <Compile Include="Models\PhysicalProfileInfo.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PhysicalProfileInfoModel.cs" />
     <Compile Include="Models\PhysicalStatu.cs">
       <DependentUpon>Matrimony.tt</DependentUpon>
     </Compile>

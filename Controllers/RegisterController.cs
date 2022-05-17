@@ -18,7 +18,7 @@ namespace MatrimonyAPI.Controllers
     {
         private MatrimonydbEntities db = new MatrimonydbEntities();
 
-      //  GET: api/Registers
+        //  GET: api/Registers
         public Register GetRegister()
         {
             Register rg = new Register();
@@ -27,7 +27,7 @@ namespace MatrimonyAPI.Controllers
 
 
         [HttpGet]
-        [Route("api/Register/GetRegisterDetails/")]      
+        [Route("api/Register/GetRegisterDetails/")]
         [ResponseType(typeof(RegisterDetailsModel))]
         public async Task<IHttpActionResult> GetRegisterDetails()
         {
@@ -55,7 +55,7 @@ namespace MatrimonyAPI.Controllers
 
                 reader.NextResult();
 
-                List<ReligionModel> _listOfReligion=
+                List<ReligionModel> _listOfReligion =
                 ((IObjectContextAdapter)db).ObjectContext.Translate<ReligionModel>
         (reader).ToList();
 
@@ -110,7 +110,7 @@ namespace MatrimonyAPI.Controllers
         (reader).ToList();
                 reader.NextResult();
 
-                List<FamilyTypeModel> _listOfFamilyType=
+                List<FamilyTypeModel> _listOfFamilyType =
                 ((IObjectContextAdapter)db).ObjectContext.Translate<FamilyTypeModel>
         (reader).ToList();
 
@@ -147,11 +147,11 @@ namespace MatrimonyAPI.Controllers
             finally
             {
                 db.Database.Connection.Close();
-            }       
+            }
         }
 
 
-     
+
 
         // POST: api/Register
         [ResponseType(typeof(User))]
@@ -161,14 +161,14 @@ namespace MatrimonyAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-             var key = "b14ca5898a4e4133bbce2ea2315a1916";
+            var key = "b14ca5898a4e4133bbce2ea2315a1916";
 
-             
-          var encryptedString = EncryptionDecryption.EncryptString(key, reg.PasswordHash);
+
+            var encryptedString = EncryptionDecryption.EncryptString(key, reg.PasswordHash);
             User usermd = new User
             {
                 GUID = Guid.NewGuid().ToString(),
-                RoleId = 3,
+                RoleId = reg.RoleId,
                 ProfileForId = reg.ProfileForId,
                 GenderId = reg.GenderId,
                 FullName = reg.FullName,
@@ -179,7 +179,7 @@ namespace MatrimonyAPI.Controllers
                 CountryId = reg.CountryId,
                 StateId = reg.StateId,
                 DistrictId = reg.DistrictId,
-                CityId = reg.CityId,                
+                CityId = reg.CityId,
                 Village = reg.Village,
                 PostalCode = reg.PostalCode,
                 MobileNumber = reg.MobileNumber,
@@ -193,14 +193,14 @@ namespace MatrimonyAPI.Controllers
                 CreatedBy = reg.CreatedBy,
                 DateModified = DateTime.Now,
                 ModifiedBy = reg.ModifiedBy,
-                Termsandconditions= reg.Termsandconditions
-                
+                Termsandconditions = reg.Termsandconditions
+
             };
             VendorForClient vendorclient = new VendorForClient
             {
                 VendorId = reg.VendorId,
-                CreatedBy= reg.CreatedBy,
-                DateCreated= DateTime.Now,
+                CreatedBy = reg.CreatedBy,
+                DateCreated = DateTime.Now,
                 DateModified = DateTime.Now,
                 ModifiedBy = reg.ModifiedBy
 
@@ -215,39 +215,153 @@ namespace MatrimonyAPI.Controllers
                 db.Users.Add(usermd);
                 await db.SaveChangesAsync();
                 vendorclient.ClientId = usermd.Id;
-                reg.Id = usermd.Id;  
-                if(reg.VendorId !=0)
+                reg.Id = usermd.Id;
+                if (reg.VendorId != 0)
                 {
                     db.VendorForClients.Add(vendorclient);
                     await db.SaveChangesAsync();
                 }
-            
+
                 scope.Complete();
             }
 
-            
-           // await db.SaveChangesAsync();
+
+            // await db.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = usermd.Id }, reg);
         }
 
-        // GET: api/Register/5
-        //[ResponseType(typeof(User))]
-        //public async Task<IHttpActionResult> GetRegister(int id)
-        //{
-        //    User reg = await db.Users.FindAsync(id);
-        //    if (reg == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // Get: api/Register
+        [HttpPost]
+        [Route("api/Register/CompleteRegistration")]         
+        public async Task<IHttpActionResult> CompleteRegister(CompleteRegistrationModel reg)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    return Ok(reg);
-        //}
-        //[HttpGet]
-        //[Route("api/Register/GetEmailValidate/")]
-        //private bool GetEmailValidate(string emailId)
-        //{
-        //    return db.Users.Count(e => e.EmailId == emailId) > 0;
-        //}
+            if (reg  == null)
+            {
+                return BadRequest();
+            }
+            PhysicalProfileInfo Ppinfo = new PhysicalProfileInfo
+            {
+                BodyTypeId = reg.physicalprofileinfo.BodyTypeId,
+                ComplexionId = reg.physicalprofileinfo.ComplexionId,
+                PhysicalStatusId = reg.physicalprofileinfo.PhysicalStatusId,
+                HeightId = reg.physicalprofileinfo.HeightId,
+                Weight = reg.physicalprofileinfo.Weight,
+                EducationId = reg.physicalprofileinfo.EducationId,
+                EmploymentTypeId = reg.physicalprofileinfo.EmploymentTypeId,
+                OccupationId = reg.physicalprofileinfo.OccupationId,
+                AnnualIncomeId = reg.physicalprofileinfo.AnnualIncomeId,
+                UserId =reg.UserID,
+                DateCreated= DateTime.Now,
+                CreatedBy = reg.CreatedBy,
+                ModofiedBy = reg.ModifiedBy,
+                DateModified = DateTime.Now
+            };
+
+            FamilyDetail Fmdtl = new FamilyDetail
+            {
+
+                FamilytypeId = reg.familydetail.FamilytypeId,
+                FamilystatusId = reg.familydetail.FamilystatusId,
+                FathersSurname = reg.familydetail.FathersSurname,
+                FathersName = reg.familydetail.FathersName,
+                FathersOccupation = reg.familydetail.FathersOccupation,
+                MothersSurname = reg.familydetail.MothersSurname,
+                MothersName = reg.familydetail.MothersName,
+                MothersOccupation = reg.familydetail.MothersOccupation,
+                NoOfSisters = reg.familydetail.NoOfSisters,
+                NoOfBrothers = reg.familydetail.NoOfBrothers,
+                UserId = reg.UserID,
+                DateCreated = DateTime.Now,
+                CreatedBy = reg.CreatedBy,
+                ModifiedBy = reg.ModifiedBy,
+                DateModified = DateTime.Now
+            };
+
+            PartnerPreferance Prtpre = new PartnerPreferance
+            {
+                StarId = reg.partnerpreferance.StarId,
+                EducationId = reg.partnerpreferance.EducationId,
+                EmployeetypeId = reg.partnerpreferance.EmployeetypeId,
+                OccupationId = reg.partnerpreferance.OccupationId,
+                AnnualIncomeId = reg.partnerpreferance.AnnualIncomeId,
+                CountryId = reg.partnerpreferance.CountryId,
+                StateId = reg.partnerpreferance.StateId,
+                DistrictId = reg.partnerpreferance.DistrictId,
+                CityId = reg.partnerpreferance.CityId,
+                UserId = reg.UserID,
+                DateCreated = DateTime.Now,
+                CreatedBy = reg.CreatedBy,
+                ModifiedBy = reg.ModifiedBy,
+                DateModified = DateTime.Now
+            };
+            PermanantAddress Peradd = new PermanantAddress
+            {
+                Address1 = reg.permanantaddress.Address1,
+                Address2 = reg.permanantaddress.Address2,
+                CountryId = reg.permanantaddress.CountryId,
+                StateId = reg.permanantaddress.StateId,
+                CityId = reg.permanantaddress.CityId,
+                AddressType = reg.permanantaddress.AddressType,
+                DistrictId = reg.permanantaddress.DistrictId,
+                UserId = reg.UserID,
+                DateCreated = DateTime.Now,
+                CreatedBy = reg.CreatedBy,
+                ModifiedBy = reg.ModifiedBy,
+                DateModified = DateTime.Now
+
+            };
+
+            using (var scope = new TransactionScope(
+     TransactionScopeOption.RequiresNew, new TransactionOptions()
+     {
+         IsolationLevel = System.Transactions.IsolationLevel.ReadCommitted
+     }, TransactionScopeAsyncFlowOption.Enabled))
+            {
+                if (db.PhysicalProfileInfoes.Any(e => e.UserId == reg.UserID))
+                {
+                    db.Entry(Ppinfo).State = EntityState.Modified;
+                }
+                else
+                {
+                    db.PhysicalProfileInfoes.Add(Ppinfo);
+                }
+                if (db.FamilyDetails.Any(e => e.UserId == reg.UserID))
+                {
+                    db.Entry(Fmdtl).State = EntityState.Modified;
+                }
+                else
+                {
+                    db.FamilyDetails.Add(Fmdtl);
+                }
+                if (db.PartnerPreferances.Any(e => e.UserId == reg.UserID))
+                {
+                    db.Entry(Prtpre).State = EntityState.Modified;
+                }
+                else
+                {
+                    db.PartnerPreferances.Add(Prtpre);
+                }
+
+                if (db.PermanantAddresses.Any(e => e.UserId == reg.UserID))
+                {
+                    db.Entry(Peradd).State = EntityState.Modified;
+                }
+                else
+                {
+                    db.PermanantAddresses.Add(Peradd);
+                }
+                await db.SaveChangesAsync();
+                scope.Complete();
+
+            }
+            
+            return Ok(reg);  
+        }
     }
 }
